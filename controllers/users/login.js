@@ -12,7 +12,7 @@ const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
 
-    if (!user) {
+    if (!user || !user.verify) {
       const error = new Error("Email or password is wrong");
       error.status = 401;
       throw error;
