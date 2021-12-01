@@ -5,6 +5,8 @@ const {
   logout,
   signup,
   updateAvatar,
+  verify,
+  repeatVerify,
 } = require("../../controllers/users/");
 const { joiSchema } = require("../../model/user");
 const { authenticate } = require("../../middlewares/authenticate");
@@ -28,4 +30,7 @@ router.post("/signup", validation(joiSchema), signup);
 router.post("/login", validation(joiSchema), login);
 router.post("/logout", authenticate, logout);
 router.patch("/avatar", authenticate, upload.single("avatar"), updateAvatar);
+router.get("/verify/:verificationToken", verify);
+router.post("/verify", repeatVerify);
+
 module.exports = router;
